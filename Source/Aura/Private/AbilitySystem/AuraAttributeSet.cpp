@@ -176,9 +176,17 @@ void UAuraAttributeSet::ShowFloatingText(const FEffectProperties& Props, float D
 {
 	if (Props.SourceCharacter != Props.TargetCharacter)
 	{
+		//플레이어가 피해를 입힐 때
 		if (AAuraPlayerController* PC = Cast<AAuraPlayerController>(Props.SourceCharacter->Controller))
 		{
 			PC->ShowDamageNumber(Damage, Props.TargetCharacter, bBlockedHit,bCriticalHit);
+			return;
+		}
+
+		//적이 피해를 입힐 때
+		if (AAuraPlayerController* PC = Cast<AAuraPlayerController>(Props.TargetCharacter->Controller))
+		{
+			PC->ShowDamageNumber(Damage, Props.TargetCharacter, bBlockedHit, bCriticalHit);
 		}
 	}
 }
